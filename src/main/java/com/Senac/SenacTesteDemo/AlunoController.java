@@ -41,6 +41,7 @@ public class AlunoController {
         alunos.get(id).setNome(atualizado);
         Aluno aluno = alunos.get(id);
         return aluno.getNome();
+
     }
 
     // DELETE – Remove um aluno pelo id
