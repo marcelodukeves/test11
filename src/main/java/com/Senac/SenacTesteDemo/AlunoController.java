@@ -27,22 +27,20 @@ public class AlunoController {
     }
 
     // POST – Adiciona um novo aluno
-    @PostMapping
-    public String adicionar(@RequestBody Aluno novo) {
-        alunos.add(novo);
+    @PostMapping("/{id}")
+    public String adicionar(@PathVariable Long id,
+                            @RequestBody String novo) {
+        alunos.add(new Aluno(id, novo));
         return "Aluno adicionado com sucesso!";
     }
 
     // PUT – Atualiza os dados de um aluno pelo id
     @PutMapping("/{id}")
-    public String atualizar(@PathVariable Long id, @RequestBody Aluno atualizado) {
-        for (Aluno a : alunos) {
-            if (a.getId().equals(id)) {
-                a.setNome(atualizado.getNome());
-                return "Aluno atualizado com sucesso!";
-            }
-        }
-        return "Aluno não encontrado.";
+    public String atualizar(@PathVariable int id, @RequestBody String atualizado) {
+
+        alunos.get(id).setNome(atualizado);
+        Aluno aluno = alunos.get(id);
+        return aluno.getNome();
     }
 
     // DELETE – Remove um aluno pelo id
